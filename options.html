@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Back To Work · Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 20px 24px 32px;
+        max-width: 720px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        background: #020617;
+        color: #e5e7eb;
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0 0 4px;
+      }
+      p.subtitle {
+        margin: 0 0 16px;
+        font-size: 13px;
+        color: #9ca3af;
+      }
+      .section {
+        margin-top: 18px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(31, 41, 55, 0.9);
+      }
+      .section h2 {
+        font-size: 13px;
+        margin: 0 0 4px;
+      }
+      .section p {
+        font-size: 12px;
+        margin: 0 0 8px;
+        color: #9ca3af;
+      }
+      label {
+        font-size: 12px;
+        display: block;
+        margin-bottom: 4px;
+      }
+      textarea,
+      input,
+      select {
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid rgba(55, 65, 81, 0.9);
+        padding: 7px 9px;
+        background: #020617;
+        color: #e5e7eb;
+        font-size: 12px;
+        resize: vertical;
+      }
+      textarea {
+        min-height: 80px;
+      }
+      .days-grid {
+        margin-top: 4px;
+        border-radius: 10px;
+        border: 1px solid rgba(31, 41, 55, 0.9);
+        background: rgba(15, 23, 42, 0.9);
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+      .day-row {
+        display: grid;
+        grid-template-columns: auto 1fr 1fr;
+        gap: 8px;
+        align-items: center;
+        padding: 4px 0;
+      }
+      .day-row + .day-row {
+        border-top: 1px solid rgba(31, 41, 55, 0.6);
+      }
+      .day-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .day-label span {
+        min-width: 60px;
+      }
+      .day-row input[type='number'] {
+        width: 100%;
+      }
+      .humor-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 6px;
+      }
+      .humor-row input[type='range'] {
+        flex: 1;
+      }
+      .humor-label {
+        font-size: 11px;
+        color: #9ca3af;
+        min-width: 90px;
+        text-align: right;
+      }
+      button.primary {
+        margin-top: 14px;
+        padding: 7px 14px;
+        border-radius: 999px;
+        border: none;
+        background: #2563eb;
+        color: #f9fafb;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      button.primary:disabled {
+        opacity: 0.6;
+        cursor: default;
+      }
+      .status {
+        margin-top: 8px;
+        font-size: 11px;
+        color: #9ca3af;
+        min-height: 14px;
+      }
+      .footer {
+        margin-top: 24px;
+        font-size: 11px;
+        color: #6b7280;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      a {
+        color: #93c5fd;
+        text-decoration: none;
+        font-size: 11px;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Back To Work</h1>
+    <p class="subtitle">
+      Configure which sites count as work, when you want to be in work mode, and how playful the extension should be.
+    </p>
+
+    <form id="settingsForm">
+      <div class="section">
+        <h2>Work sites</h2>
+        <p>Domains that count as focused work. One domain per line (for example: <code>github.com</code>).</p>
+        <label for="workSites">Domains</label>
+        <textarea id="workSites" name="workSites" spellcheck="false"></textarea>
+      </div>
+
+      <div class="section">
+        <h2>Work days and hours</h2>
+        <p>Select which days are work days and set start and end hours for each.</p>
+        <div class="days-grid">
+          <div class="day-row" data-day-row="1">
+            <div class="day-label">
+              <input type="checkbox" id="day-1" data-day-toggle="1" />
+              <span>Monday</span>
+            </div>
+            <input type="number" min="0" max="23" id="start-1" data-start-hour="1" placeholder="Start" />
+            <input type="number" min="0" max="23" id="end-1" data-end-hour="1" placeholder="End" />
+          </div>
+          <div class="day-row" data-day-row="2">
+            <div class="day-label">
+              <input type="checkbox" id="day-2" data-day-toggle="2" />
+              <span>Tuesday</span>
+            </div>
+            <input type="number" min="0" max="23" id="start-2" data-start-hour="2" placeholder="Start" />
+            <input type="number" min="0" max="23" id="end-2" data-end-hour="2" placeholder="End" />
+          </div>
+          <div class="day-row" data-day-row="3">
+            <div class="day-label">
+              <input type="checkbox" id="day-3" data-day-toggle="3" />
+              <span>Wednesday</span>
+            </div>
+            <input type="number" min="0" max="23" id="start-3" data-start-hour="3" placeholder="Start" />
+            <input type="number" min="0" max="23" id="end-3" data-end-hour="3" placeholder="End" />
+          </div>
+          <div class="day-row" data-day-row="4">
+            <div class="day-label">
+              <input type="checkbox" id="day-4" data-day-toggle="4" />
+              <span>Thursday</span>
+            </div>
+            <input type="number" min="0" max="23" id="start-4" data-start-hour="4" placeholder="Start" />
+            <input type="number" min="0" max="23" id="end-4" data-end-hour="4" placeholder="End" />
+          </div>
+          <div class="day-row" data-day-row="5">
+            <div class="day-label">
+              <input type="checkbox" id="day-5" data-day-toggle="5" />
+              <span>Friday</span>
+            </div>
+            <input type="number" min="0" max="23" id="start-5" data-start-hour="5" placeholder="Start" />
+            <input type="number" min="0" max="23" id="end-5" data-end-hour="5" placeholder="End" />
+          </div>
+          <div class="day-row" data-day-row="6">
+            <div class="day-label">
+              <input type="checkbox" id="day-6" data-day-toggle="6" />
+              <span>Saturday</span>
+            </div>
+            <input type="number" min="0" max="23" id="start-6" data-start-hour="6" placeholder="Start" />
+            <input type="number" min="0" max="23" id="end-6" data-end-hour="6" placeholder="End" />
+          </div>
+          <div class="day-row" data-day-row="0">
+            <div class="day-label">
+              <input type="checkbox" id="day-0" data-day-toggle="0" />
+              <span>Sunday</span>
+            </div>
+            <input type="number" min="0" max="23" id="start-0" data-start-hour="0" placeholder="Start" />
+            <input type="number" min="0" max="23" id="end-0" data-end-hour="0" placeholder="End" />
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Extension mood</h2>
+        <p>How playful Back To Work should be when nudging you.</p>
+        <div class="humor-row">
+          <input type="range" id="humorPercent" min="0" max="100" step="5" />
+          <div id="humorLabel" class="humor-label">Balanced</div>
+        </div>
+      </div>
+
+      <button type="submit" class="primary">Save settings</button>
+      <div id="status" class="status"></div>
+    </form>
+
+    <div class="footer">
+      <span>Built by dashweb.agency</span>
+      <a href="https://dashweb.agency" target="_blank" rel="noreferrer">Visit website</a>
+    </div>
+
+    <script src="options.js"></script>
+  </body>
+</html>
+
